@@ -38,7 +38,70 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initActivity();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_about_me) {
+            appBarLayout.setElevation(0);
+            toolbar.setTitle(null);
+
+            Fragment fragment = FragmentFactory.newInstance("ABOUTME");
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+
+            fab.hide();
+
+        } else if (id == R.id.nav_friends) {
+            toolbar.setTitle("Antisocial social network");
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new Fragment())
+                    .commit();
+            fab.show();
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void initActivity() {
         setSupportActionBar(toolbar);
+
+        toolbar.setTitle("Antisocial social network");
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,59 +123,5 @@ public class MainActivity extends AppCompatActivity
                 .load(getDrawable(R.drawable.elon))
                 .apply(RequestOptions.circleCropTransform())
                 .into((ImageView) linearLayout.getChildAt(0));
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_about_me) {
-            appBarLayout.setElevation(0);
-            toolbar.setTitle(null);
-            Fragment fragment = new AboutMeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
-
-            fab.hide();
-
-        } else if (id == R.id.nav_friends) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment()).commit();
-            fab.show();
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
