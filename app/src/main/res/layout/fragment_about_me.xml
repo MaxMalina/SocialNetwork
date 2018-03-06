@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/scrollView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/colorPrimary"
+                xmlns:app="http://schemas.android.com/tools"
+                android:orientation="horizontal"
+                android:gravity="center|left">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:src="@drawable/elon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="17dp">
+
+                    <TextView
+                        android:text="Elon Musk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#fff"/>
+
+                    <TextView
+                        android:text="online"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/fab"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:layout_margin="@dimen/fab_margin"
+                app:backgroundTint="#fff"
+                app:srcCompat="@drawable/ic_menu_camera"
+                />
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_info"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:paddingTop="7dp"
+                        android:paddingLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Info"/>
+
+                    <TextView
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textColor="#000"
+                        android:text="sample.sample@android.com"/>
+
+                    <TextView
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textColor="#9E9E9E"
+                        android:text="Email"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:paddingTop="7dp"
+                    android:paddingLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Personal information"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="Elon"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="Name"
+                    android:paddingBottom="7dp"/>
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#9E9E9E"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="Musk"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="Surame"
+                    android:paddingBottom="7dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#9E9E9E"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="28/06/1971"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="Date of birth"
+                    android:paddingBottom="7dp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:paddingTop="7dp"
+                    android:paddingLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Education"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="University of Pennsylvania"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="University"
+                    android:paddingBottom="7dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#9E9E9E"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="Pretoria Boys High School"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="School"
+                    android:paddingBottom="7dp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:paddingTop="7dp"
+                    android:paddingLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Contact info"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="\@elonmusk"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="Twitter"
+                    android:paddingBottom="7dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#9E9E9E"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:text="+1 (310) 363 60 00"/>
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="#9E9E9E"
+                    android:text="Phone"
+                    android:paddingBottom="7dp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

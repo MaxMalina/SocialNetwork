@@ -1,8 +1,10 @@
 package com.learn.maksymgromov.socialnetwork;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.fab) FloatingActionButton fab;
     @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.app_bar_layout) AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +99,17 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_about_me) {
+        if (id == R.id.nav_about_me) {
+            appBarLayout.setElevation(0);
+            toolbar.setTitle(null);
+            Fragment fragment = new AboutMeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+
+            fab.hide();
 
         } else if (id == R.id.nav_friends) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment()).commit();
+            fab.show();
         }
 
         drawer.closeDrawer(GravityCompat.START);
