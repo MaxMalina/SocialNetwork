@@ -29,14 +29,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:textColor="#9E9E9E"
+        android:textColor="@color/colorTextGray"
         android:text="Twitter"
         android:paddingBottom="7dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E0E0E0"/>
+        android:background="@color/colorSplit"/>
 
     <TextView
         android:paddingLeft="5dp"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:textColor="#9E9E9E"
+        android:textColor="@color/colorTextGray"
         android:text="Phone"
         android:paddingBottom="7dp"/>
 
