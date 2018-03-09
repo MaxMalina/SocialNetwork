@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textColor="@color/colorTextGray"
-        android:text="Surame"
+        android:text="Surname"
         android:paddingBottom="7dp"/>
 
     <LinearLayout

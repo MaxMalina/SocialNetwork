@@ -92,12 +92,26 @@ public class MainActivity extends AppCompatActivity
             fab.hide();
 
         } else if (id == R.id.nav_friends) {
-            toolbar.setTitle("Antisocial social network");
+            toolbar.setTitle("Friends");
             toolbar.setNavigationIcon(navigationIcon);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new Fragment())
                     .commit();
+
+            fab.setImageResource(R.drawable.ic_add_black_24dp);
+            fab.show();
+        } else if (id==R.id.nav_news) {
+            toolbar.setTitle("Antisocial social network");
+            toolbar.setNavigationIcon(navigationIcon);
+
+            Fragment fragment = FragmentFactory.newInstance(NewsFragment.NEWS_FRAGMENT_NAME);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+
+            fab.setImageResource(R.drawable.ic_create_black_24dp);
             fab.show();
         }
 
@@ -130,5 +144,18 @@ public class MainActivity extends AppCompatActivity
                 .load(getDrawable(R.drawable.elon))
                 .apply(RequestOptions.circleCropTransform())
                 .into((ImageView) linearLayout.getChildAt(0));
+
+        toolbar.setTitle("Antisocial social network");
+        toolbar.setNavigationIcon(navigationIcon);
+
+        Fragment fragment = FragmentFactory.newInstance(NewsFragment.NEWS_FRAGMENT_NAME);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+
+        fab.setImageResource(R.drawable.ic_create_black_24dp);
+        fab.show();
+
     }
 }
