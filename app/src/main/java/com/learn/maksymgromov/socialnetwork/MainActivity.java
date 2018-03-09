@@ -1,5 +1,6 @@
 package com.learn.maksymgromov.socialnetwork;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.fab) FloatingActionButton fab;
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.app_bar_layout) AppBarLayout appBarLayout;
+
+    private Drawable navigationIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +79,21 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_about_me) {
             appBarLayout.setElevation(0);
             toolbar.setTitle(null);
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+            navigationView.setVisibility(View.INVISIBLE);
 
-            Fragment fragment = FragmentFactory.newInstance("ABOUTME");
+            Fragment fragment = FragmentFactory.newInstance(AboutMeFragment.ABOUT_ME_FRAGMENT_NAME);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
+                    .add(R.id.fragment_container, fragment)
+                    .addToBackStack(AboutMeFragment.ABOUT_ME_FRAGMENT_NAME)
                     .commit();
 
             fab.hide();
 
         } else if (id == R.id.nav_friends) {
             toolbar.setTitle("Antisocial social network");
+            toolbar.setNavigationIcon(navigationIcon);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new Fragment())
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationIcon = toolbar.getNavigationIcon();
 
         LinearLayout linearLayout = (LinearLayout) navigationView.getHeaderView(0);
         Glide.with(this)
