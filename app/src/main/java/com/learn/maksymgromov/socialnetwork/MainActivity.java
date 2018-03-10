@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
             navigationView.setVisibility(View.INVISIBLE);
 
-            Fragment fragment = FragmentFactory.newInstance(AboutMeFragment.ABOUT_ME_FRAGMENT_NAME);
+            Fragment fragment = FragmentFactory.newInstance(AboutMeFragment.TAG);
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.fragment_container, fragment)
-                    .addToBackStack(AboutMeFragment.ABOUT_ME_FRAGMENT_NAME)
+                    .addToBackStack(AboutMeFragment.TAG)
                     .commit();
 
             fab.hide();
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             toolbar.setTitle("Antisocial social network");
             toolbar.setNavigationIcon(navigationIcon);
 
-            Fragment fragment = FragmentFactory.newInstance(NewsFragment.NEWS_FRAGMENT_NAME);
+            Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle("Antisocial social network");
         toolbar.setNavigationIcon(navigationIcon);
 
-        Fragment fragment = FragmentFactory.newInstance(NewsFragment.NEWS_FRAGMENT_NAME);
+        Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)

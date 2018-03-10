@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 public class AboutMeFragment extends Fragment {
 
-    public static String ABOUT_ME_FRAGMENT_NAME = AboutMeFragment.class.getSimpleName();
+    public static String TAG = AboutMeFragment.class.getSimpleName();
 
     @BindView(R.id.scrollView) ScrollView scrollView;
     @BindView(R.id.imageView) ImageView imageView;

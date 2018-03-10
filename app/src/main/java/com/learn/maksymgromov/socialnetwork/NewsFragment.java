@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 public class NewsFragment extends Fragment {
 
-    public static String NEWS_FRAGMENT_NAME = NewsFragment.class.getSimpleName();
+    public static String TAG = NewsFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
