@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -49,6 +51,27 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment f : fragments) {
+                if(f != null && f.isVisible() && f.getTag().equalsIgnoreCase(AboutMeFragment.TAG)){
+                    toolbar.setTitle("Antisocial social network");
+                    toolbar.setNavigationIcon(navigationIcon);
+
+                    Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
+
+                    fab.setImageResource(R.drawable.ic_create_black_24dp);
+                    fab.show();
+
+                    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawer, toolbar,
+                            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                    drawer.addDrawerListener(toggle);
+                    toggle.syncState();
+                }
+            }
             super.onBackPressed();
         }
     }
@@ -80,18 +103,46 @@ public class MainActivity extends AppCompatActivity
             appBarLayout.setElevation(0);
             toolbar.setTitle(null);
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+            toolbar.setNavigationOnClickListener(toolbarToogle());
             navigationView.setVisibility(View.INVISIBLE);
 
             Fragment fragment = FragmentFactory.newInstance(AboutMeFragment.TAG);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container, fragment)
+                    .replace(R.id.fragment_container, fragment, AboutMeFragment.TAG)
                     .addToBackStack(AboutMeFragment.TAG)
                     .commit();
+
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toolbar.setTitle("Antisocial social network");
+                    toolbar.setNavigationIcon(navigationIcon);
+
+                    Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
+
+                    fab.setImageResource(R.drawable.ic_create_black_24dp);
+                    fab.show();
+
+                    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawer, toolbar,
+                            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                    drawer.addDrawerListener(toggle);
+                    toggle.syncState();
+                }
+            });
 
             fab.hide();
 
         } else if (id == R.id.nav_friends) {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                    R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
             toolbar.setTitle("Friends");
             toolbar.setNavigationIcon(navigationIcon);
             getSupportFragmentManager()
@@ -102,8 +153,14 @@ public class MainActivity extends AppCompatActivity
             fab.setImageResource(R.drawable.ic_add_black_24dp);
             fab.show();
         } else if (id==R.id.nav_news) {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                    R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
             toolbar.setTitle("Antisocial social network");
             toolbar.setNavigationIcon(navigationIcon);
+            toolbar.setNavigationOnClickListener(toolbarToogle());
 
             Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
             getSupportFragmentManager()
@@ -136,6 +193,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //пиздец какой-то я хуй знает зачем я это написал
+        toolbar.setNavigationOnClickListener(toolbarToogle());
+
         navigationView.setNavigationItemSelectedListener(this);
         navigationIcon = toolbar.getNavigationIcon();
 
@@ -157,5 +217,20 @@ public class MainActivity extends AppCompatActivity
         fab.setImageResource(R.drawable.ic_create_black_24dp);
         fab.show();
 
+    }
+
+    private View.OnClickListener toolbarToogle() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int drawerLockMode = drawer.getDrawerLockMode(GravityCompat.START);
+                if (drawer.isDrawerVisible(GravityCompat.START)
+                        && (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_OPEN)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else if (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_CLOSED) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        };
     }
 }
