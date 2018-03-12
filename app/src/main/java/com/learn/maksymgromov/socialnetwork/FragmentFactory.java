@@ -8,6 +8,8 @@ public class FragmentFactory {
             return new AboutMeFragment();
         } else if (fragmentType.equalsIgnoreCase(NewsFragment.TAG)) {
             return new NewsFragment();
+        } else if (fragmentType.equalsIgnoreCase(FriendsFragment.TAG)) {
+            return new FriendsFragment();
         } else {
             return new Fragment();
         }

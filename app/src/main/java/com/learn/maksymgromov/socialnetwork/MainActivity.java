@@ -138,16 +138,15 @@ public class MainActivity extends AppCompatActivity
             fab.hide();
 
         } else if (id == R.id.nav_friends) {
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                    R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-            toggle.syncState();
+            initDrawer();
 
             toolbar.setTitle("Friends");
             toolbar.setNavigationIcon(navigationIcon);
+
+            Fragment fragment = FragmentFactory.newInstance(FriendsFragment.TAG);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new Fragment())
+                    .replace(R.id.fragment_container, fragment)
                     .commit();
 
             fab.setImageResource(R.drawable.ic_add_black_24dp);
@@ -174,6 +173,13 @@ public class MainActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initDrawer() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     public void initActivity() {
