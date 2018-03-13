@@ -46,6 +46,8 @@ public class AboutMeFragment extends Fragment {
 
     public static int SELECT_IMAGE = 1;
 
+    private User user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class AboutMeFragment extends Fragment {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
         });
 
-        User user = Utils.getUserFromJsonRawFile(getResources(), R.raw.user);
+        user = Utils.getUserFromJsonRawFile(getResources(), R.raw.user);
 
         Bitmap bitmap = BitmapFactory.decodeFile(user.getImagePath());
         Glide.with(this)
@@ -79,6 +81,7 @@ public class AboutMeFragment extends Fragment {
 
         return view;
     }
+    /*/storage/emulated/0/Download/melon.jpg*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -93,6 +96,9 @@ public class AboutMeFragment extends Fragment {
                                 .load(bitmap)
                                 .apply(RequestOptions.circleCropTransform())
                                 .into(imageView);
+
+                        user.setImagePath(data.getData().getPath());
+                        Utils.saveUserToJson("/storage/emulated/0/Download/user.json", user);
 
                     } catch (IOException e) {
                         e.printStackTrace();

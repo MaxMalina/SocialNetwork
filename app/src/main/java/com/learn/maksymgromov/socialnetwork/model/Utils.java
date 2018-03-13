@@ -2,10 +2,16 @@ package com.learn.maksymgromov.socialnetwork.model;
 
 import android.content.res.Resources;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +23,8 @@ public class Utils {
 
         return parseJsonStringToUser(jsonText);
     }
+
+
 
     private static User parseJsonStringToUser(String jsonText) {
         try {
@@ -54,5 +62,16 @@ public class Utils {
             e.printStackTrace();
         }
         return total.toString();
+    }
+
+    public static void saveUserToJson(String path, User user) {
+        Gson gson = new GsonBuilder().create();
+        try {
+            FileWriter fw = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(gson.toJson(user));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
