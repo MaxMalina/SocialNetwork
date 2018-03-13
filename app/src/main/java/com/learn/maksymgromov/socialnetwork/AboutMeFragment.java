@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.learn.maksymgromov.socialnetwork.model.User;
+import com.learn.maksymgromov.socialnetwork.model.Utils;
 
 import java.io.IOException;
 
@@ -29,6 +32,15 @@ public class AboutMeFragment extends Fragment {
     @BindView(R.id.scrollView) ScrollView scrollView;
     @BindView(R.id.imageView) ImageView imageView;
     @BindView(R.id.fabPhoto) FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.email) TextView emailTextView;
+    @BindView(R.id.name) TextView nameTextView;
+    @BindView(R.id.surname) TextView surnameTextView;
+    @BindView(R.id.dateOfBirth) TextView dateOfBirthTextView;
+    @BindView(R.id.university) TextView universityTextView;
+    @BindView(R.id.school) TextView schoolTextView;
+    @BindView(R.id.twitter) TextView twitterTextView;
+    @BindView(R.id.phone) TextView phoneTextView;
 
     public static int SELECT_IMAGE = 1;
 
@@ -50,6 +62,18 @@ public class AboutMeFragment extends Fragment {
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
         });
+
+        User user = Utils.getUserFromJsonRawFile(getResources(), R.raw.user);
+
+        emailTextView.setText(user.getInfo());
+        nameTextView.setText(user.getName());
+        surnameTextView.setText(user.getSurname());
+        dateOfBirthTextView.setText(user.getDateOfBirth());
+        universityTextView.setText(user.getUniversity());
+        schoolTextView.setText(user.getSchool());
+        twitterTextView.setText(user.getTwitter());
+        phoneTextView.setText(user.getPhone());
+
         return view;
     }
 

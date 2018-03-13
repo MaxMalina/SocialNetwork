@@ -15,6 +15,7 @@
         android:text="Info"/>
 
     <TextView
+        android:id="@+id/email"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:layout_width="wrap_content"
