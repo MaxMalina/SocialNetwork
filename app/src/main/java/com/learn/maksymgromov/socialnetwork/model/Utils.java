@@ -1,6 +1,7 @@
 package com.learn.maksymgromov.socialnetwork.model;
 
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -78,6 +79,7 @@ public class Utils {
         return new User();
     }
 
+    @NonNull
     private static String readTextFile(InputStream inputStream) {
         BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
         String x;
@@ -97,9 +99,7 @@ public class Utils {
     public static void saveUserToJson(User user) {
         Gson gson = new GsonBuilder().create();
         try {
-            FileWriter fw = new FileWriter("/storage/emulated/0/Download/user.json");
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(gson.toJson(user));
+            gson.toJson(user, new FileWriter("/storage/emulated/0/Download/user.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,9 +108,7 @@ public class Utils {
     public static void saveFriendsToJson(ArrayList<Friend> friends) {
         Gson gson = new GsonBuilder().create();
         try {
-            FileWriter fw = new FileWriter("/storage/emulated/0/Download/friends.json");
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(gson.toJson(friends));
+            gson.toJson(friends, new FileWriter("/storage/emulated/0/Download/friends.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }

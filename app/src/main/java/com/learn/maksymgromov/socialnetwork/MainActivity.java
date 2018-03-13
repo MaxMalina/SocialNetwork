@@ -76,6 +76,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onClick(View v) {
+        toolbar.setTitle("Antisocial social network");
+        toolbar.setNavigationIcon(navigationIcon);
+        createFragmentTransaction(NewsFragment.TAG);
+
+        fabNewsState();
+        initDrawer();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -100,9 +110,7 @@ public class MainActivity extends AppCompatActivity
             createFragmentTransaction(AboutMeFragment.TAG);
 
             toolbar.setNavigationOnClickListener(this);
-
             fab.hide();
-
         } else if (id == R.id.nav_friends) {
             initDrawer();
 
@@ -113,7 +121,7 @@ public class MainActivity extends AppCompatActivity
 
             fab.setImageResource(R.drawable.ic_add_black_24dp);
             fab.show();
-        } else if (id==R.id.nav_news) {
+        } else if (id == R.id.nav_news) {
             initDrawer();
 
             toolbar.setTitle("Antisocial social network");
@@ -159,7 +167,6 @@ public class MainActivity extends AppCompatActivity
         createFragmentTransaction(NewsFragment.TAG);
 
         fabNewsState();
-
     }
 
     private void createFragmentTransaction(String tag) {
@@ -168,16 +175,6 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
-    }
-
-    @Override
-    public void onClick(View v) {
-        toolbar.setTitle("Antisocial social network");
-        toolbar.setNavigationIcon(navigationIcon);
-        createFragmentTransaction(NewsFragment.TAG);
-
-        fabNewsState();
-        initDrawer();
     }
 
     private void fabNewsState() {
