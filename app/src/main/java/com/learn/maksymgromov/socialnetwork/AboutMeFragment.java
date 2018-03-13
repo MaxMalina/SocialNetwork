@@ -3,6 +3,7 @@ package com.learn.maksymgromov.socialnetwork;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.learn.maksymgromov.socialnetwork.model.User;
 import com.learn.maksymgromov.socialnetwork.model.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -51,11 +53,6 @@ public class AboutMeFragment extends Fragment {
                 false);
         ButterKnife.bind(this, view);
 
-        Glide.with(this)
-                .load(imageView.getDrawable())
-                .apply(RequestOptions.circleCropTransform())
-                .into(imageView);
-
         floatingActionButton.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setType("image/*");
@@ -64,6 +61,12 @@ public class AboutMeFragment extends Fragment {
         });
 
         User user = Utils.getUserFromJsonRawFile(getResources(), R.raw.user);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(user.getImagePath());
+        Glide.with(this)
+                .load(bitmap)
+                .apply(RequestOptions.circleCropTransform())
+                .into(imageView);
 
         emailTextView.setText(user.getInfo());
         nameTextView.setText(user.getName());

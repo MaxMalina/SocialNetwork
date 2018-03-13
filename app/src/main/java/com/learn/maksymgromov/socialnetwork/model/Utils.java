@@ -23,6 +23,7 @@ public class Utils {
             JSONObject jsonUser = new JSONObject(jsonText);
             User user = new User();
 
+            user.setImagePath(jsonUser.getString("imagePath"));
             user.setInfo(jsonUser.getString("info"));
             user.setName(jsonUser.getString("name"));
             user.setSurname(jsonUser.getString("surname"));

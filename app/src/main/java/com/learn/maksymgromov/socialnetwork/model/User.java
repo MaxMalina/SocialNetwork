@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+    private String imagePath;
     private String info;
     private String name;
     private String surname;
@@ -15,7 +16,8 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(String info, String name, String surname, String dateOfBirth, String university, String school, String twitter, String phone) {
+    public User(String imagePath, String info, String name, String surname, String dateOfBirth, String university, String school, String twitter, String phone) {
+        this.imagePath = imagePath;
         this.info = info;
         this.name = name;
         this.surname = surname;
@@ -26,7 +28,13 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
 
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public String getInfo() {
         return info;
