@@ -2,6 +2,7 @@ package com.learn.maksymgromov.socialnetwork;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -56,20 +57,11 @@ public class MainActivity extends AppCompatActivity
                 if(f != null && f.isVisible() && f.getTag().equalsIgnoreCase(AboutMeFragment.TAG)){
                     toolbar.setTitle("Antisocial social network");
                     toolbar.setNavigationIcon(navigationIcon);
+                    createFragmentTransaction(NewsFragment.TAG);
 
-                    Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .commit();
+                    fabNewsState();
 
-                    fab.setImageResource(R.drawable.ic_create_black_24dp);
-                    fab.show();
-
-                    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawer, toolbar,
-                            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                    drawer.addDrawerListener(toggle);
-                    toggle.syncState();
+                    initDrawer();
                 }
             }
             super.onBackPressed();
@@ -96,44 +88,18 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_about_me) {
             appBarLayout.setElevation(0);
             toolbar.setTitle(null);
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-            toolbar.setNavigationOnClickListener(toolbarToogle());
             navigationView.setVisibility(View.INVISIBLE);
 
-            Fragment fragment = FragmentFactory.newInstance(AboutMeFragment.TAG);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment, AboutMeFragment.TAG)
-                    .addToBackStack(AboutMeFragment.TAG)
-                    .commit();
+            createFragmentTransaction(AboutMeFragment.TAG);
 
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toolbar.setTitle("Antisocial social network");
-                    toolbar.setNavigationIcon(navigationIcon);
-
-                    Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .commit();
-
-                    fab.setImageResource(R.drawable.ic_create_black_24dp);
-                    fab.show();
-
-                    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawer, toolbar,
-                            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                    drawer.addDrawerListener(toggle);
-                    toggle.syncState();
-                }
-            });
+            toolbar.setNavigationOnClickListener(this);
 
             fab.hide();
 
@@ -143,32 +109,19 @@ public class MainActivity extends AppCompatActivity
             toolbar.setTitle("Friends");
             toolbar.setNavigationIcon(navigationIcon);
 
-            Fragment fragment = FragmentFactory.newInstance(FriendsFragment.TAG);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+            createFragmentTransaction(FriendsFragment.TAG);
 
             fab.setImageResource(R.drawable.ic_add_black_24dp);
             fab.show();
         } else if (id==R.id.nav_news) {
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                    R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-            toggle.syncState();
+            initDrawer();
 
             toolbar.setTitle("Antisocial social network");
             toolbar.setNavigationIcon(navigationIcon);
-            toolbar.setNavigationOnClickListener(toolbarToogle());
 
-            Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+            createFragmentTransaction(NewsFragment.TAG);
 
-            fab.setImageResource(R.drawable.ic_create_black_24dp);
-            fab.show();
+            fabNewsState();
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -186,21 +139,10 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle("Antisocial social network");
         setSupportActionBar(toolbar);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        //пиздец какой-то я хуй знает зачем я это написал
-        toolbar.setNavigationOnClickListener(toolbarToogle());
+        initDrawer();
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationIcon = toolbar.getNavigationIcon();
@@ -214,29 +156,32 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle("Antisocial social network");
         toolbar.setNavigationIcon(navigationIcon);
 
-        Fragment fragment = FragmentFactory.newInstance(NewsFragment.TAG);
+        createFragmentTransaction(NewsFragment.TAG);
+
+        fabNewsState();
+
+    }
+
+    private void createFragmentTransaction(String tag) {
+        Fragment fragment = FragmentFactory.newInstance(tag);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
-
-        fab.setImageResource(R.drawable.ic_create_black_24dp);
-        fab.show();
-
     }
 
-    private View.OnClickListener toolbarToogle() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int drawerLockMode = drawer.getDrawerLockMode(GravityCompat.START);
-                if (drawer.isDrawerVisible(GravityCompat.START)
-                        && (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_OPEN)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else if (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_CLOSED) {
-                    drawer.openDrawer(GravityCompat.START);
-                }
-            }
-        };
+    @Override
+    public void onClick(View v) {
+        toolbar.setTitle("Antisocial social network");
+        toolbar.setNavigationIcon(navigationIcon);
+        createFragmentTransaction(NewsFragment.TAG);
+
+        fabNewsState();
+        initDrawer();
+    }
+
+    private void fabNewsState() {
+        fab.setImageResource(R.drawable.ic_create_black_24dp);
+        fab.show();
     }
 }
