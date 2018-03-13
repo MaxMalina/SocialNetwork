@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.learn.maksymgromov.socialnetwork.model.Friend;
+import com.learn.maksymgromov.socialnetwork.model.Utils;
 
 import java.util.ArrayList;
 
@@ -31,9 +32,8 @@ public class FriendsFragment extends Fragment {
 
         mFriendsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayList<Friend> data = new ArrayList<>();
-        data.add(new Friend("Elon", "Musk", "+1 (310) 363 60 00"));
-        data.add(new Friend("Musk", "Elon", "+1 (310) 363 00 60"));
+        ArrayList<Friend> data = Utils.getFriendsFromJsonRawFile(getResources(), R.raw.friends);
+        Utils.saveFriendsToJson(data);
 
         FriendsAdapter mAdapter = new FriendsAdapter(getContext(), data);
         mFriendsRecyclerView.setAdapter(mAdapter);

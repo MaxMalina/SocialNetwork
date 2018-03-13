@@ -1,0 +1,13 @@
+[
+    {
+        "name" : "Elon",
+        "surname" : "Musk",
+        "phone" : "+1 (310) 363 60 00"
+    },
+
+    {
+        "name" : "Musk",
+        "surname" : "Elon",
+        "phone" : "+1 (210) 161 00 60"
+    }
+]

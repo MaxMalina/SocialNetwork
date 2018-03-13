@@ -22,7 +22,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsH
     private List<Friend> mFriendList;
     private Context mContext;
 
-    public FriendsAdapter(Context context, List<Friend> data) {
+    FriendsAdapter(Context context, List<Friend> data) {
         mContext = context;
         mFriendList = data;
     }
@@ -37,16 +37,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsH
 
     @Override
     public void onBindViewHolder(FriendsHolder holder, int position) {
-        final Friend friend = mFriendList.get(position);
-
-        String nameSurname = friend.getmName() + ' ' + friend.getmSurname();
-        holder.mNameSurname.setText(nameSurname);
-        holder.mPhone.setText(friend.getmPhoneNumber());
-
-        Glide.with(mContext)
-                .load(mContext.getDrawable(R.drawable.elon))
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.mThumbnail);
+        holder.bindFriend(mFriendList.get(position));
     }
 
     @Override
@@ -62,8 +53,18 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsH
 
         FriendsHolder(View itemView) {
             super(itemView);
-
             ButterKnife.bind(this, itemView);
+        }
+
+        private void bindFriend(Friend friend) {
+            String nameSurname = friend.getName() + ' ' + friend.getSurname();
+            mNameSurname.setText(nameSurname);
+            mPhone.setText(friend.getPhone());
+
+            Glide.with(mContext)
+                    .load(mContext.getDrawable(R.drawable.elon))
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(mThumbnail);
         }
     }
 }

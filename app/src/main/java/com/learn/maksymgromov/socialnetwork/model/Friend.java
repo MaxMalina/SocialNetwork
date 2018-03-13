@@ -1,37 +1,41 @@
 package com.learn.maksymgromov.socialnetwork.model;
 
-public class Friend {
-    private String mName;
-    private String mSurname;
-    private String mPhoneNumber;
+import java.io.Serializable;
 
-    public Friend(String mName, String mSurname, String mPhoneNumber) {
-        this.mName = mName;
-        this.mSurname = mSurname;
-        this.mPhoneNumber = mPhoneNumber;
+public class Friend implements Serializable {
+    private String name;
+    private String surname;
+    private String phone;
+
+    public Friend(){}
+
+    public Friend(String name, String surname, String phone) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
     }
 
-    public String getmName() {
-        return mName;
+    public String getName() {
+        return name;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getmSurname() {
-        return mSurname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setmSurname(String mSurname) {
-        this.mSurname = mSurname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getmPhoneNumber() {
-        return mPhoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setmPhoneNumber(String mPhoneNumber) {
-        this.mPhoneNumber = mPhoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

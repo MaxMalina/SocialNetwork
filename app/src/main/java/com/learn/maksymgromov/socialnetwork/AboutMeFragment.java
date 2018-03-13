@@ -21,7 +21,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.learn.maksymgromov.socialnetwork.model.User;
 import com.learn.maksymgromov.socialnetwork.model.Utils;
 
-import java.io.File;
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -62,6 +61,39 @@ public class AboutMeFragment extends Fragment {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
         });
 
+        initUserData();
+
+        return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SELECT_IMAGE) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                        Glide.with(this)
+                                .load(bitmap)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(imageView);
+
+                        user.setImagePath(data.getData().getPath());
+                        Utils.saveUserToJson(user);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void initUserData() {
         user = Utils.getUserFromJsonRawFile(getResources(), R.raw.user);
 
         Bitmap bitmap = BitmapFactory.decodeFile(user.getImagePath());
@@ -78,36 +110,6 @@ public class AboutMeFragment extends Fragment {
         schoolTextView.setText(user.getSchool());
         twitterTextView.setText(user.getTwitter());
         phoneTextView.setText(user.getPhone());
-
-        return view;
     }
     /*/storage/emulated/0/Download/melon.jpg*/
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_IMAGE) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                        Glide.with(this)
-                                .load(bitmap)
-                                .apply(RequestOptions.circleCropTransform())
-                                .into(imageView);
-
-                        user.setImagePath(data.getData().getPath());
-                        Utils.saveUserToJson("/storage/emulated/0/Download/user.json", user);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }
